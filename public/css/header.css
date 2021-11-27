@@ -1,0 +1,68 @@
+header {
+	height: 80px;
+	border-bottom: 1px solid white;
+}
+
+#mobileNav {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 100vh;
+	width: 100vw;
+}
+
+img {
+	height: 70px;
+	width: 70px;
+}
+
+.mobileUl {
+	margin-top: 30vh;
+	height: 30vh;
+}
+
+ul {
+	margin: 0;
+}
+
+#burgerBtn,
+#closeBtn {
+	cursor: pointer;
+}
+
+/* Mobiles mode */
+@media screen and (max-width: 1000px) {
+	.desktopNav {
+		display: none;
+	}
+	.burgerCol {
+		display: flex;
+	}
+	#mobileNav {
+		display: none;
+	}
+}
+
+/* Desktop mode */
+@media screen and (min-width: 1000px) {
+	.desktopNav {
+		display: flex;
+	}
+	.burgerCol {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 1000px) and (max-width: 1399px) {
+	.desktopNav li {
+		font-size: 15px;
+	}
+}
+
+@media screen and (min-width: 1400px) {
+	.desktopNav li {
+		font-size: 20px;
+	}
+}
