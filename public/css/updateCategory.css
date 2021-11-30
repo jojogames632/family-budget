@@ -35,13 +35,3 @@ form,
 	height: 15px;
 	width: 40px;
 }
-
-.categoryInfos {
-	font-size: 13px;
-	white-space: nowrap;
-}
-
-.svgContainer svg {
-	min-width: 16px;
-	min-height: 16px;
-} 

@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Catégories{% endblock %}
+{% block title %}Mettre à jour une catégorie{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
-	<link rel="stylesheet" href="{{ asset('css/category.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/updateCategory.css') }}" />
 {% endblock %}
 
 {% block body %}
     <header class="bg-dark">
 		<nav class="row m-0">
 			<a class="col-1" href="{{ path('home') }}">
-				<img src="images/family-budget-logo.png" alt="logo" />
+				<img src="../images/family-budget-logo.png" alt="logo" />
 			</a>
 			<div class="col-10 align-items-center desktopNav">
 				{# Desktop nav #}
@@ -98,38 +98,8 @@
 		</nav>
 	</header>
     <main>
-		<section id="categoriesSection" class="mt-4">
-			<div class="row mb-3">
-				<div class="col-4 d-flex justify-content-center align-items-center text-info fw-bold">Nom</div>
-				<div class="col-3 d-flex justify-content-center align-items-center text-info fw-bold">Type</div>
-				<div class="col-3 d-flex justify-content-center align-items-center text-info fw-bold">Couleur</div>
-				<div class="col-2"></div>
-			</div>
-			{% for category in categories %}
-				<div class="row mb-2">
-					<div class="col-4 d-flex justify-content-center align-items-center text-white categoryInfos">{{ category.name }}</div>
-					<div class="col-3 d-flex justify-content-center align-items-center text-white categoryInfos">{{ category.type }}</div>
-					<div class="col-3 d-flex justify-content-center align-items-center">
-						<div style="background-color : {{ category.color }}" class="categoryColorContainer"></div>
-					</div>
-					<div class="col-2 d-flex justify-content-between align-items-center svgContainer">
-						<a href="{{ path('update_category', { 'id' : category.id }) }}" class="col-2 d-flex justify-content-center me-2">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill text-warning" viewBox="0 0 16 16">
-								<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-							</svg>
-						</a>
-						<a href="{{ path('delete_category', { 'id' : category.id }) }}" class="col-2 d-flex justify-content-center" onclick="return confirm('Êtes-vous sûre de vouloir supprimer cette catégorie ?')">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill text-danger" viewBox="0 0 16 16">
-								<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-							</svg>
-						</a>
-					</div>
-				</div>
-			{% endfor %}
-		</section>
-
 		{{ form_start(form) }}
-			<p class="text-info text-center fs-4 fw-bold">Créer une catégorie</p>
+			<p class="text-info text-center fs-4 fw-bold">Mettre à jour une catégorie</p>
 			{{ form_label(form.name, 'Nom') }}
 			{{ form_widget(form.name) }}
 			{{ form_errors(form.name) }}

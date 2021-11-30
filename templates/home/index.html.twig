@@ -101,7 +101,7 @@
 		<div id="selectContainer" class="d-flex justify-content-center align-items-center mt-5 fs-4 fw-bold">
 			<select id="accountSelector" name="accountSelector">
 				{% for account in accounts %}
-					<option value="{{ account.name }}">{{ account.name }}</option>
+					<option value="{{ account.id }}">{{ account.name }}</option>
 				{% endfor %}
 			</select>
 			<a href="{{ path('add_account') }}" class="ms-3">
@@ -110,9 +110,23 @@
 				</svg>
 			</a>
 		</div>
+
+		<section id="accountInfos" class="mt-4">
+			{% include "home/_accountInfos.html.twig" %}
+		</section>
+
+		<section id="accountGraph" class="mt-4">
+
+		</section>
+		
+		<section id="importSection" class="mt-4">
+
+		</section>
+
     </main>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/account.js') }}"></script>
 {% endblock %}

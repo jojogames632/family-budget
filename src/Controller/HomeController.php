@@ -7,6 +7,7 @@ use App\Form\AccountType;
 use App\Repository\AccountRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,12 +16,25 @@ class HomeController extends AbstractController
     /**
      * @Route("", name="home")
      */
-    public function index(AccountRepository $accountRepository)
-    {
+    public function index(AccountRepository $accountRepository, Request $request)
+    {   
+        if ($request->get('ajax')) {
+            $accountId = $request->get('account');
+            $currentAccount = $accountRepository->find($accountId);
+            
+            return new JsonResponse([
+                'content' => $this->renderView('home/_accountInfos.html.twig', [
+                    'account' => $currentAccount
+                ])
+            ]);
+        }
+
         $accounts = $accountRepository->findAll();
+        $currentAccount = $accountRepository->findOneByName('Courant');
 
         return $this->render('home/index.html.twig', [
-           'accounts' => $accounts
+           'accounts' => $accounts,
+           'account' => $currentAccount
         ]);
     }
 

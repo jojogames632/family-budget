@@ -1,0 +1,5 @@
+<p class="text-center text-white">Compte N° {{ account.number }}
+<div class="d-flex justify-content-center align-items-center">
+	<span class="text-info fs-2">{{ account.balance }} €</span>
+	<span class="text-white ms-2">au {{ account.updateDate|date('d/m/Y') }}</span>
+</div>
