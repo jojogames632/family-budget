@@ -2,5 +2,22 @@ main {
 	height: calc(100vh - 80px);
 	background-color: #212528;
 	color: white;
-	overflow-y: scroll;
+	overflow: scroll;
+}
+
+.monthRow {
+	font-size: 12px;
+	font-weight: bold;
+	width: 95vw;
+	margin: auto;
+}
+
+.active {
+	background-color: #0FCAF0;
+	color: black;
+}
+
+.transactionRow {
+	font-size: 10px;
+	white-space: nowrap;
 }

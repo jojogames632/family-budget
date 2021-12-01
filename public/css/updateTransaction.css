@@ -2,7 +2,12 @@ main {
 	height: calc(100vh - 80px);
 	background-color: #212528;
 	color: white;
-	overflow-y: scroll;
+	overflow: scroll;
+}
+
+.transactionRow {
+	font-size: 11px;
+	white-space: nowrap;
 }
 
 form {
@@ -11,19 +16,6 @@ form {
 	width: 75vw;
 	margin: auto;
 	margin-top: 40px;
-}
-
-input,
-select {
-	height: 30px;
-	background-color: #2b2e30;
-	border-color: #0FCAF0;
-	color: white;
-	margin-bottom: 10px;
-}
-
-form,
-#categoriesSection {
 	background-color: #2b2e30;
 	border-radius: 15px;
 	padding: 15px;
@@ -31,7 +23,14 @@ form,
 	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
 }
 
-.categoryColorContainer {
-	height: 15px;
-	width: 40px;
+select {
+	border-color: #0FCAF0;
+	background-color: #212528;
+	color: #0FCAF0;
+	margin-bottom: 15px;
+	height: 30px;
+}
+
+label {
+	margin-bottom: 5px;
 }

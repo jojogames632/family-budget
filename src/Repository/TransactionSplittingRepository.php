@@ -19,32 +19,28 @@ class TransactionSplittingRepository extends ServiceEntityRepository
         parent::__construct($registry, TransactionSplitting::class);
     }
 
-    // /**
-    //  * @return TransactionSplitting[] Returns an array of TransactionSplitting objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getTransactionsSplittingWithMonth($month = null)
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+        if ($month === null) {
+            $month = (int) date('m');
+        }
+
+        $year = (int) date('Y');
+
+        $dateMin = new \DateTimeImmutable("$year-$month-01T00:00:00");
+        $dateMax = (clone $dateMin)->modify('last day of this month')->setTime(23, 59, 59);
+
+        return $this->createQueryBuilder('ts')
+            ->where('ts.bankDate BETWEEN :dateMin AND :dateMax')
+            ->setParameters(
+                [
+                    'dateMin' => $dateMin->format('Y-m-d H:i:s'),
+                    'dateMax' => $dateMax->format('Y-m-d H:i:s'),
+                ]
+            )
+            ->orderBy('ts.bankDate', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?TransactionSplitting
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

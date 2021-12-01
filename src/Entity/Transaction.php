@@ -20,7 +20,7 @@ class Transaction
     private $id;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $bankDate;
 

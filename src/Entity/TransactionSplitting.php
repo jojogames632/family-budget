@@ -35,9 +35,14 @@ class TransactionSplitting
     private $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="transactionSplittings")
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="recurringTransactionSplittings")
      */
     private $recurringCategory;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $bankDate;
 
     public function getId(): ?int
     {
@@ -88,6 +93,18 @@ class TransactionSplitting
     public function setRecurringCategory(?Category $recurringCategory): self
     {
         $this->recurringCategory = $recurringCategory;
+
+        return $this;
+    }
+
+    public function getBankDate(): ?\DateTimeInterface
+    {
+        return $this->bankDate;
+    }
+
+    public function setBankDate(\DateTimeInterface $bankDate): self
+    {
+        $this->bankDate = $bankDate;
 
         return $this;
     }

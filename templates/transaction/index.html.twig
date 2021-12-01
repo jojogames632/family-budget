@@ -98,9 +98,35 @@
 		</nav>
 	</header>
     <main>
+		<div class="row mt-3 monthRow">
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="1">J</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="2">F</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="3">M</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="4">A</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="5">M</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="6">J</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="7">J</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="8">A</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="9">S</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="10">O</div>
+			<div class="col-1 d-flex justify-content-center align-items-center border-end border-info" id="11">N</div>
+			<div class="col-1 d-flex justify-content-center align-items-center" id="12">D</div>
+		</div>
+
+		<div class="row mt-4 border-bottom border-info pb-2 mb-2">
+			<div class="col-2 d-flex justify-content-center align-items-center">Date</div>
+			<div class="col-3 d-flex justify-content-center align-items-center text-info fw-bold">Catégorie</div>
+			<div class="col-3 d-flex justify-content-center align-items-center">Libéllé</div>
+			<div class="col-2 d-flex justify-content-center align-items-center">Montant</div>
+			<div class="col-2 d-flex justify-content-center align-items-center">Solde</div>
+		</div>
+		<section id="transactionsSection">
+			{% include "transaction/_transactions.html.twig" %}
+		</section>
     </main>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/transaction.js') }}"></script>
 {% endblock %}

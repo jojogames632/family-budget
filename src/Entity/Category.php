@@ -49,6 +49,11 @@ class Category
      */
     private $transactionSplittings;
 
+    /**
+     * @ORM\OneToMany(targetEntity=TransactionSplitting::class, mappedBy="recurringCategory")
+     */
+    private $recurringTransactionSplittings;
+
     public function __construct()
     {
         $this->transactionSplittings = new ArrayCollection();

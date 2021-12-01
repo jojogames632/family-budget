@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mettre à jour une catégorie{% endblock %}
+{% block title %}Mettre à jour une transaction{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
-	<link rel="stylesheet" href="{{ asset('css/updateCategory.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/updateTransaction.css') }}" />
 {% endblock %}
 
 {% block body %}
@@ -24,17 +24,17 @@
                         <a href="{{ path('home') }}" class="text-decoration-none text-white fw-bold ms-2">Accueil</a>
                     </li>
                     <li class="d-flex align-items-center">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill text-info" viewBox="0 0 16 16">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill text-white" viewBox="0 0 16 16">
                             <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
                             <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
                         </svg>
-                        <a href="{{ path('category') }}" class="text-decoration-none text-info fw-bold ms-2">Catégories</a>
+                        <a href="{{ path('category') }}" class="text-decoration-none text-white fw-bold ms-2">Catégories</a>
                     </li>
 					<li class="d-flex align-items-center">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right text-white" viewBox="0 0 16 16">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right text-info" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
                         </svg>
-						<a href="{{ path('transaction') }}" class="text-decoration-none text-white fw-bold ms-2">Transactions</a>
+						<a href="{{ path('transaction') }}" class="text-decoration-none text-info fw-bold ms-2">Transactions</a>
 					</li>
 					<li class="d-flex align-items-center">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-piggy-bank-fill text-white" viewBox="0 0 16 16">
@@ -68,17 +68,17 @@
 							<a href="{{ path('home') }}" class="text-decoration-none text-white fw-bold ms-2">Accueil</a>
 						</li>
 						<li class="d-flex align-items-center">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill text-info" viewBox="0 0 16 16">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tags-fill text-white" viewBox="0 0 16 16">
                                 <path d="M2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2zm3.5 4a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
                                 <path d="M1.293 7.793A1 1 0 0 1 1 7.086V2a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l.043-.043-7.457-7.457z"/>
                             </svg>
-							<a href="{{ path('category') }}" class="text-decoration-none text-info fw-bold ms-2">Catégories</a>
+							<a href="{{ path('category') }}" class="text-decoration-none text-white fw-bold ms-2">Catégories</a>
 						</li>
 						<li class="d-flex align-items-center">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right text-white" viewBox="0 0 16 16">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-right text-info" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
                             </svg>
-							<a href="{{ path('transaction') }}" class="text-decoration-none text-white fw-bold ms-2">Transactions</a>
+							<a href="{{ path('transaction') }}" class="text-decoration-none text-info fw-bold ms-2">Transactions</a>
 						</li>
 						<li class="d-flex align-items-center">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-piggy-bank-fill text-white" viewBox="0 0 16 16">
@@ -99,24 +99,29 @@
 	</header>
     <main>
 		<p class="mt-3">
-			<a href="{{ path('category') }}" class="text-decoration-none text-white mb-5">&lsaquo; Annuler</a>
+			<a href="{{ path('transaction') }}" class="text-decoration-none text-white mb-5">&lsaquo; Annuler</a>
 		</p>
+		<h1 class="text-center fs-3 text-info fw-bold my-4">Modifier la transaction</h1>
+		<div class="row transactionRow">
+			<div class="col-2 d-flex justify-content-center align-items-center">{{ transactionSplitting.transaction.bankDate|date('d-m') }}</div>
+			<div class="col-3 d-flex flex-column justify-content-center align-items-center text-info fw-bold">{{ transactionSplitting.category.name }}</div>
+			<div class="col-3 d-flex justify-content-center align-items-center">{{ transactionSplitting.transaction.name }}</div>
+			<div class="col-2 d-flex justify-content-center align-items-center {{ transactionSplitting.amount > 0 ? 'text-success' : 'text-danger' }}">{{ transactionSplitting.amount }} €</div>
+			<div class="col-2 d-flex justify-content-center align-items-center">{{ transactionSplitting.transaction.balance }} €</div>	
+		</div>
+
 		{{ form_start(form) }}
-			<p class="text-info text-center fs-4 fw-bold">Mettre à jour une catégorie</p>
-			{{ form_label(form.name, 'Nom') }}
-			{{ form_widget(form.name) }}
-			{{ form_errors(form.name) }}
 
-			{{ form_label(form.type, 'Type') }}
-			{{ form_widget(form.type) }}
-			{{ form_errors(form.type) }}
+			{{ form_label(form.category, 'Catégorie') }}
+			{{ form_widget(form.category) }}
+			{{ form_errors(form.category) }}
 
-			{{ form_label(form.color, 'Couleur') }}
-			{{ form_widget(form.color) }}
-			{{ form_errors(form.color) }}
+			{{ form_label(form.recurringCategory, 'Catégorie par défaut') }}
+			{{ form_widget(form.recurringCategory) }}
+			{{ form_errors(form.recurringCategory) }}
 
 			<p class="text-center">
-				<button type="submit" class="btn btn-outline-info btn-sm">OK</button>
+				<button type="submit" class="btn btn-sm btn-outline-info">OK</button>
 			</p>
 		{{ form_end(form) }}
     </main>
