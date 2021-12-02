@@ -4,14 +4,14 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/header.css') }}" />
-	<link rel="stylesheet" href="{{ asset('css/budget.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/updateBudget.css') }}" />
 {% endblock %}
 
 {% block body %}
     <header class="bg-dark">
 		<nav class="row m-0">
 			<a class="col-1" href="{{ path('home') }}">
-				<img src="images/family-budget-logo.png" alt="logo" />
+				<img src="../images/family-budget-logo.png" alt="logo" />
 			</a>
 			<div class="col-10 align-items-center desktopNav">
 				{# Desktop nav #}
@@ -98,21 +98,61 @@
 		</nav>
 	</header>
     <main>
-		<div class="d-flex justify-content-evenly mt-4">
-			<label for="startDate">Du</label>
-			<input type="date" id="startDate" name="startDate" value="{{ firstDayOfCurrentMonth }}">
-			<label for="endDate">au</label>
-			<input type="date" id="endDate" name="endDate" value="{{ lastDayOfCurrentMonth }}">
-		</div>
+		<p class="mt-3">
+			<a href="{{ path('budget') }}" class="text-decoration-none text-white mb-5">&lsaquo; Annuler</a>
+		</p>
+		<h1 class="text-center text-info fs-2">{{ budget.name }}</h1>
 
-		<section id="budgetSection">
-			{% include "budget/_budget.html.twig" %}
+		<section id="defUpdateSection" class="my-5">
+			<h2 class="text-primary fs-4 mb-3">Modification</h2>
+			{{ form_start(form) }}
+				<div class="row">
+					<div class="col-4 d-flex flex-column defAmountCol">
+						{{ form_label(form.plannedAmount, 'Montant') }}
+						{{ form_widget(form.plannedAmount) }}
+					</div>
+					<div class="col-8 d-flex flex-column defDeadlineCol">
+						{{ form_label(form.deadlineNumber, 'Échéance') }}
+						<div class="d-flex justify-content-between align-items-center deadlineInputsContainer">
+							{{ form_widget(form.deadlineNumber) }}	
+							{{ form_widget(form.deadlineWord) }}
+							<button type="submit" class="btn btn-sm btn-outline-info ms-3">Valider</button>
+						</div>
+					</div>
+				</div>
+			{{ form_end(form) }}
 		</section>
 
+		<section id="tempUpdateSection">
+			<h2 class="text-primary fs-4 mb-3">Modification temporaire</h2>
+			{{ form_start(form2) }}
+				<div class="row">
+					<div class="col-4 d-flex flex-column defAmountCol">
+						{{ form_label(form2.plannedAmount, 'Montant') }}
+						{{ form_widget(form2.plannedAmount) }}
+					</div>
+					<div class="col-8 d-flex flex-column defDeadlineCol">
+						{{ form_label(form2.deadlineNumber, 'Échéance') }}
+						<div class="d-flex align-items-center deadlineInputsContainer">
+							{{ form_widget(form2.deadlineNumber) }}	
+							{{ form_widget(form2.deadlineWord) }}
+						</div>
+					</div>
+				</div>
+				<div class="d-flex tempUpdateEndDateCol mt-2">
+					{{ form_label(form2.tempUpdateEndDate, 'Prend fin le') }}
+					{{ form_widget(form2.tempUpdateEndDate) }}	
+				</div>
+				<div class="d-flex plannedAmountAfterTempUpdateCol mt-2">
+					{{ form_label(form2.plannedAmountAfterTempUpdate, 'Montant après') }}
+					{{ form_widget(form2.plannedAmountAfterTempUpdate) }}	
+					<p class="ms-5"><button type="submit" class="btn btn-sm btn-outline-info ms-3">Valider</button></p>
+				</div>
+			{{ form_end(form2) }}
+		</section>
     </main>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('js/header.js') }}"></script>
-    <script src="{{ asset('js/budget.js') }}"></script>
 {% endblock %}

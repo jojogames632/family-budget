@@ -1,0 +1,51 @@
+main {
+	height: calc(100vh - 80px);
+	background-color: #212528;
+	color: white;
+	overflow-y: scroll;
+}
+
+input,
+select {
+	height: 30px;
+	background-color: #2b2e30;
+	border-color: #0FCAF0;
+	color: white;
+	margin-bottom: 10px;
+	width: 100px;
+}
+
+.defAmountCol input {
+	width: 80px;
+	margin-top: 10px;
+}
+
+.defDeadlineCol select,
+.defDeadlineCol input {
+	margin-top: 10px;
+}
+
+.deadlineInputsContainer input {
+	width: 30px;
+	margin-right: 10px;
+}
+
+#defUpdateSection,
+#tempUpdateSection {
+	background-color: #2b2e30;
+	border-radius: 15px;
+	padding: 15px;
+	border: 1px solid rgb(77, 76, 76);
+	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
+	margin: auto;
+}
+
+.tempUpdateEndDateCol input {
+	margin-left: 20px;
+	width: 150px;	
+}
+
+.plannedAmountAfterTempUpdateCol input {
+	margin-left: 20px;
+	width: 77px;
+}

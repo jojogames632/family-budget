@@ -1,0 +1,71 @@
+<p class="text-center text-primary fw-bold fs-5 mt-5">Fixe</p>
+<div class="row tableHeader border-bottom border-info pb-2">
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Catégorie</div>
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Échéance</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Réel</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Prévu</div>
+	<div class="col-1 d-flex justify-content-center align-items-center fw-bold text-info">%</div>
+	<div class="col-1"></div>
+</div>
+{% for row in fixedCategories %}
+	<div class="row tableRow my-2">
+		<div class="col-3 d-flex justify-content-center align-items-center">
+			<a href="{{ path('update_budget', { 'id' : row.id }) }}" class="text-decoration-none text-white">	
+				{{ row.name }}
+			</a>
+		</div>
+		<div class="col-3 d-flex justify-content-center align-items-center text-white">{{ row.deadlineNumber != null ? row.deadlineNumber ~ ' ' ~ row.deadlineWord : '-' }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ realValues[row.name] }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? row.plannedAmount ~ ' €' : '-' }}</div>
+		<div class="col-1 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? (realValues[row.name] / row.plannedAmount * 100)|round(0, 'floor')|abs : '-' }}</div>
+		<div class="col-1"></div>
+	</div>
+{% endfor %}
+
+<p class="text-center text-primary fw-bold fs-5 mt-5">Semi-variable</p>
+<div class="row tableHeader border-bottom border-info pb-2">
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Catégorie</div>
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Échéance</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Réel</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Prévu</div>
+	<div class="col-1 d-flex justify-content-center align-items-center fw-bold text-info">%</div>
+	<div class="col-1"></div>
+</div>
+{% for row in semiVariableCategories %}
+	<div class="row tableRow my-2">
+		<div class="col-3 d-flex justify-content-center align-items-center">
+			<a href="{{ path('update_budget', { 'id' : row.id }) }}" class="text-decoration-none text-white">	
+				{{ row.name }}
+			</a>
+		</div>
+		<div class="col-3 d-flex justify-content-center align-items-center text-white">{{ row.deadlineNumber != null ? row.deadlineNumber ~ ' ' ~ row.deadlineWord : '-' }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ realValues[row.name] }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? row.plannedAmount ~ ' €' : '-' }}</div>
+		<div class="col-1 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? (realValues[row.name] / row.plannedAmount * 100)|round(0, 'floor')|abs : '-' }}</div>
+		<div class="col-1"></div>
+	</div>
+{% endfor %}
+
+<p class="text-center text-primary fw-bold fs-5 mt-5">Variable</p>
+<div class="row tableHeader border-bottom border-info pb-2">
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Catégorie</div>
+	<div class="col-3 d-flex justify-content-center align-items-center fw-bold text-info">Échéance</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Réel</div>
+	<div class="col-2 d-flex justify-content-center align-items-center fw-bold text-info">Prévu</div>
+	<div class="col-1 d-flex justify-content-center align-items-center fw-bold text-info">%</div>
+	<div class="col-1"></div>
+</div>
+{% for row in variableCategories %}
+	<div class="row tableRow my-2">
+		<div class="col-3 d-flex justify-content-center align-items-center">
+			<a href="{{ path('update_budget', { 'id' : row.id }) }}" class="text-decoration-none text-white">	
+				{{ row.name }}
+			</a>
+		</div>
+		<div class="col-3 d-flex justify-content-center align-items-center text-white">{{ row.deadlineNumber != null ? row.deadlineNumber ~ ' ' ~ row.deadlineWord : '-' }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ realValues[row.name] }}</div>
+		<div class="col-2 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? row.plannedAmount ~ ' €' : '-' }}</div>
+		<div class="col-1 d-flex justify-content-center align-items-center text-white">{{ row.plannedAmount != null ? (realValues[row.name] / row.plannedAmount * 100)|round(0, 'floor')|abs : '-' }}</div>
+		<div class="col-1"></div>
+	</div>
+{% endfor %}

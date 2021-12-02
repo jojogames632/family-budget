@@ -59,6 +59,36 @@ class Category
      */
     private $recurringTransactionSplittings;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $plannedAmount;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $deadlineNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $deadlineWord;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $movement;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tempUpdateEndDate;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $plannedAmountAfterTempUpdate;
+
     public function __construct()
     {
         $this->transactionSplittings = new ArrayCollection();
@@ -155,6 +185,78 @@ class Category
                 $transactionSplitting->setCategory(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlannedAmount(): ?float
+    {
+        return $this->plannedAmount;
+    }
+
+    public function setPlannedAmount(?float $plannedAmount): self
+    {
+        $this->plannedAmount = $plannedAmount;
+
+        return $this;
+    }
+
+    public function getDeadlineNumber(): ?float
+    {
+        return $this->deadlineNumber;
+    }
+
+    public function setDeadlineNumber(?float $deadlineNumber): self
+    {
+        $this->deadlineNumber = $deadlineNumber;
+
+        return $this;
+    }
+
+    public function getDeadlineWord(): ?string
+    {
+        return $this->deadlineWord;
+    }
+
+    public function setDeadlineWord(?string $deadlineWord): self
+    {
+        $this->deadlineWord = $deadlineWord;
+
+        return $this;
+    }
+
+    public function getMovement(): ?string
+    {
+        return $this->movement;
+    }
+
+    public function setMovement(string $movement): self
+    {
+        $this->movement = $movement;
+
+        return $this;
+    }
+
+    public function getTempUpdateEndDate(): ?\DateTimeInterface
+    {
+        return $this->tempUpdateEndDate;
+    }
+
+    public function setTempUpdateEndDate(?\DateTimeInterface $tempUpdateEndDate): self
+    {
+        $this->tempUpdateEndDate = $tempUpdateEndDate;
+
+        return $this;
+    }
+
+    public function getPlannedAmountAfterTempUpdate(): ?float
+    {
+        return $this->plannedAmountAfterTempUpdate;
+    }
+
+    public function setPlannedAmountAfterTempUpdate(?float $plannedAmountAfterTempUpdate): self
+    {
+        $this->plannedAmountAfterTempUpdate = $plannedAmountAfterTempUpdate;
 
         return $this;
     }

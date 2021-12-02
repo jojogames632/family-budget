@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\TransactionSplitting;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -36,6 +37,27 @@ class TransactionSplittingRepository extends ServiceEntityRepository
                 [
                     'dateMin' => $dateMin->format('Y-m-d H:i:s'),
                     'dateMax' => $dateMax->format('Y-m-d H:i:s'),
+                ]
+            )
+            ->orderBy('ts.bankDate', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findByCategoryBetweenDates($category, $startDate, $endDate)
+    {
+        $dateMin = new DateTime($startDate);
+        $dateMax = new DateTime($endDate);
+
+        return $this->createQueryBuilder('ts')
+            ->where('ts.category = :category')
+            ->andWhere('ts.bankDate BETWEEN :dateMin AND :dateMax')
+            ->setParameters(
+                [
+                    'category' => $category,
+                    'dateMin' => $dateMin->format('Y-m-d H:i:s'),
+                    'dateMax' => $dateMax->format('Y-m-d H:i:s')
                 ]
             )
             ->orderBy('ts.bankDate', 'ASC')

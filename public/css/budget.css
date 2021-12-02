@@ -4,3 +4,20 @@ main {
 	color: white;
 	overflow-y: scroll;
 }
+
+input {
+	height: 30px;
+	background-color: #2b2e30;
+	border-color: #0FCAF0;
+	color: white;
+	margin-bottom: 10px;
+	width: 140px;
+}
+
+.tableHeader {
+	font-size: 14px;
+}
+
+.tableRow {
+	font-size: 12px;
+}
