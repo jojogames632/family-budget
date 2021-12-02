@@ -16,11 +16,6 @@ form {
 	width: 75vw;
 	margin: auto;
 	margin-top: 40px;
-	background-color: #2b2e30;
-	border-radius: 15px;
-	padding: 15px;
-	border: 1px solid rgb(77, 76, 76);
-	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
 }
 
 select {
@@ -33,4 +28,13 @@ select {
 
 label {
 	margin-bottom: 5px;
+}
+
+form,
+.transactionRow {
+	background-color: #2b2e30;
+	border-radius: 15px;
+	padding: 15px;
+	border: 1px solid rgb(77, 76, 76);
+	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
 }

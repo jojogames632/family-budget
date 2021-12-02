@@ -21,3 +21,8 @@ main {
 	font-size: 10px;
 	white-space: nowrap;
 }
+
+.updateLink:hover,
+.splitLink:hover {
+	cursor: pointer;
+}

@@ -2,12 +2,16 @@
 	<div class="row transactionRow mb-2">
 		<div class="col-2 d-flex justify-content-center align-items-center">{{ row.transaction.bankDate|date('d-m') }}</div>
 		<div class="col-3 d-flex flex-column justify-content-center align-items-center text-info fw-bold">
-			<a href="{{ path('update_transaction', { 'id' : row.id }) }}" class="text-decoration-none text-info">		
+			<a href="{{ path('update_transaction', { 'id' : row.id }) }}" class="text-decoration-none text-info updateLink">		
 				{{ row.category.name }}
 			</a>
 		</div>
 		<div class="col-3 d-flex justify-content-center align-items-center">{{ row.transaction.name }}</div>
-		<div class="col-2 d-flex justify-content-center align-items-center {{ row.amount > 0 ? 'text-success' : 'text-danger' }}">{{ row.amount }} €</div>
+		<div class="col-2 d-flex justify-content-center align-items-center">
+			<a href="{{ path('split_transaction', { 'id' : row.id }) }}" class="text-decoration-none splitLink {{ row.amount > 0 ? 'text-success' : 'text-danger' }}">
+				{{ row.amount }} €
+			</a>
+		</div>
 		<div class="col-2 d-flex justify-content-center align-items-center">{{ row.transaction.balance }} €</div>	
 	</div>
 {% endfor %}

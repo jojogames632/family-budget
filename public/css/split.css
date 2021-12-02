@@ -7,45 +7,37 @@ main {
 
 form {
 	display: flex;
+	font-size: 12px;
 	flex-direction: column;
-	width: 75vw;
 	margin: auto;
-	margin-top: 60px;
+	margin-top: 40px;
 }
 
-input,
-select {
+select,
+input {
 	height: 30px;
 	background-color: #2b2e30;
 	border-color: #0FCAF0;
 	color: white;
 	margin-bottom: 10px;
+	margin: 7px;
 }
 
-li {
-	color: red;
+input {
+	width: 60px;
+	text-align: center;
+}
+
+.transactionRow {
+	font-size: 10px;
+	white-space: nowrap;
 }
 
 form,
-#categoriesSection {
+.transactionRow {
 	background-color: #2b2e30;
 	border-radius: 15px;
 	padding: 15px;
 	border: 1px solid rgb(77, 76, 76);
 	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
 }
-
-.categoryColorContainer {
-	height: 15px;
-	width: 40px;
-}
-
-.categoryInfos {
-	font-size: 13px;
-	white-space: nowrap;
-}
-
-.svgContainer svg {
-	min-width: 16px;
-	min-height: 16px;
-} 
