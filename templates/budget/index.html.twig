@@ -98,7 +98,7 @@
 		</nav>
 	</header>
     <main>
-		<div class="d-flex justify-content-evenly mt-4">
+		<div class="d-flex justify-content-evenly align-items-center mt-4">
 			<label for="startDate">Du</label>
 			<input type="date" id="startDate" name="startDate" value="{{ firstDayOfCurrentMonth }}">
 			<label for="endDate">au</label>
@@ -108,7 +108,6 @@
 		<section id="budgetSection">
 			{% include "budget/_budget.html.twig" %}
 		</section>
-
     </main>
 {% endblock %}
 

@@ -4,3 +4,21 @@ main {
 	color: white;
 	overflow-y: scroll;
 }
+
+select {
+	background-color: #212528;
+	border-color: #0FCAF0;
+	color: white;
+}
+
+#firstPieRow {
+	margin-top: 100px;
+}
+
+@media screen and (min-width: 1000px) {
+	#graphicSection {
+		width: 33vw;
+		height: 33vh;
+		margin: auto;
+	}
+}

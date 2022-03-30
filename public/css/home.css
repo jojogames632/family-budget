@@ -25,6 +25,17 @@ select {
 	padding: 15px;
 	border: 1px solid rgb(77, 76, 76);
 	box-shadow: 3px 5px 10px 0px rgba(0, 0, 0, 1);
-	width: 80vw;
+	width: 95vw;
 	margin: auto;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+form li {
+	color: #fc4903;
+	margin-top: 10px;
 }

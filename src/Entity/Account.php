@@ -20,7 +20,7 @@ class Account
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      */
     private $name;
 
@@ -44,9 +44,15 @@ class Account
      */
     private $transactions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=AccountHistory::class, mappedBy="account")
+     */
+    private $accountHistories;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
+        $this->accountHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,6 +132,36 @@ class Account
             // set the owning side to null (unless already changed)
             if ($transaction->getAccount() === $this) {
                 $transaction->setAccount(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|AccountHistory[]
+     */
+    public function getAccountHistories(): Collection
+    {
+        return $this->accountHistories;
+    }
+
+    public function addAccountHistory(AccountHistory $accountHistory): self
+    {
+        if (!$this->accountHistories->contains($accountHistory)) {
+            $this->accountHistories[] = $accountHistory;
+            $accountHistory->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccountHistory(AccountHistory $accountHistory): self
+    {
+        if ($this->accountHistories->removeElement($accountHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($accountHistory->getAccount() === $this) {
+                $accountHistory->setAccount(null);
             }
         }
 

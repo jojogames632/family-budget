@@ -11,10 +11,10 @@
     <header class="bg-dark">
 		<nav class="row m-0">
 			<a class="col-1" href="{{ path('home') }}">
-				<img src="images/family-budget-logo.png" alt="logo" />
+				<img src="../images/family-budget-logo.png" alt="logo" />
 			</a>
+			{# Desktop nav #}
 			<div class="col-10 align-items-center desktopNav">
-				{# Desktop nav #}
 				<ul class="d-flex justify-content-between w-100">
 					<li class="d-flex align-items-center">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill text-white" viewBox="0 0 16 16">
@@ -50,6 +50,7 @@
 					</li>
 				</ul>
 			</div>
+			{# Mobile nav #}
 			<div class="col justify-content-end align-items-center burgerCol">
 				<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list text-info" id="burgerBtn" viewBox="0 0 16 16">
 					<path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
@@ -59,7 +60,6 @@
 						<span id="closeBtn" class="text-info fs-1 fw-bold">X</span>
 					</div>
 					<ul class="d-flex flex-column align-items-center justify-content-between mobileUl">
-						{# Mobile nav #}
 						<li class="d-flex align-items-center">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill text-white" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
@@ -98,9 +98,198 @@
 		</nav>
 	</header>
     <main>
+		<div class="d-flex justify-content-center mt-4">
+			<select id="accountSelect" name="accountSelect">
+				{% for account in accounts %}
+					<option value="{{ account.id }}" {{ accountId == account.id ? 'selected' : null }}>{{ account.name }}</option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<section id="graphicSection" class="mt-4">
+			<canvas id="batonCanvas" width="100" height="100"></canvas>
+		</section>
+		
+		<div class="row row-cols-1 row-cols-lg-4" id="firstPieRow">
+			{# incomes #}
+			<p class="text-center text-primary"></p>
+			<div class="col mt-4">
+				<p class="text-center text-info"></p>
+				<canvas id="pieCanvas" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas2" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas3" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas4" width="400" height="400"></canvas>
+			</div>
+		</div>
+		<div class="row row-cols-1 row-cols-lg-4">
+			{# Spent #}
+			<div class="col mt-4">
+				<canvas id="pieCanvas5" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas6" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas7" width="400" height="400"></canvas>
+			</div>
+			<div class="col mt-4">
+				<canvas id="pieCanvas8" width="400" height="400"></canvas>
+			</div>
+		</div>
     </main>
 {% endblock %}
 
 {% block javascripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js" integrity="sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/header.js') }}"></script>
+	<script src="{{ asset('js/graphic.js') }}"></script>
+	<script>
+		const batonCanvas = document.getElementById('batonCanvas').getContext('2d');
+		const batonDiagram = new Chart(batonCanvas, {
+			data: {
+				labels: {{ labels|raw }},
+				datasets: [{
+					type: 'bar',
+					label: 'Revenus',
+					data: {{ incomes|raw }},
+					backgroundColor: 'lightGreen',
+					borderColor: 'black',
+					borderWidth: 1
+				},
+				{
+					type: 'bar',
+					label: 'Dépenses',
+					data: {{ spentAmounts|raw }},
+					backgroundColor: 'crimson',
+					borderColor: 'black',
+					borderWidth: 1
+				},
+				{
+					type: 'line',
+					label: 'Solde',
+					data: {{ balances|raw }},
+					backgroundColor: 'white',
+					borderColor: 'white',
+					borderWidth: 1,
+				}]
+			}
+		})
+
+		const pieCanvas = document.getElementById('pieCanvas').getContext('2d');
+		const pieDiagram = new Chart(pieCanvas, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }}
+				}],
+			}
+		})
+
+		const pieCanvas2 = document.getElementById('pieCanvas2').getContext('2d');
+		const pieDiagram2 = new Chart(pieCanvas2, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas3 = document.getElementById('pieCanvas3').getContext('2d');
+		const pieDiagram3 = new Chart(pieCanvas3, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas4 = document.getElementById('pieCanvas4').getContext('2d');
+		const pieDiagram4 = new Chart(pieCanvas4, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas5 = document.getElementById('pieCanvas5').getContext('2d');
+		const pieDiagram5 = new Chart(pieCanvas5, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas6 = document.getElementById('pieCanvas6').getContext('2d');
+		const pieDiagram6 = new Chart(pieCanvas6, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas7 = document.getElementById('pieCanvas7').getContext('2d');
+		const pieDiagram7 = new Chart(pieCanvas7, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+		const pieCanvas8 = document.getElementById('pieCanvas8').getContext('2d');
+		const pieDiagram8 = new Chart(pieCanvas8, {
+			type: 'pie',
+			data: {
+				labels: {{ fullTypeLabels|raw }},
+				datasets: [{
+					data: {{ fullTypeMovements|raw }},
+					backgroundColor: {{ fullTypeColors|raw }},
+					borderColor: 'black',
+					borderWidth: 1 
+				}],
+			}
+		})
+
+	</script>
 {% endblock %}
