@@ -12,6 +12,10 @@ main {
 	margin: auto;
 }
 
+.monthRow div {
+	cursor: pointer;
+}
+
 .active {
 	background-color: #0FCAF0;
 	color: black;

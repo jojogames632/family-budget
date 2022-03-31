@@ -9,9 +9,9 @@
 		<div class="col-3 d-flex justify-content-center align-items-center">{{ row.transaction.name }}</div>
 		<div class="col-2 d-flex justify-content-center align-items-center">
 			<a href="{{ path('split_transaction', { 'id' : row.id }) }}" class="text-decoration-none splitLink {{ row.amount > 0 ? 'text-success' : 'text-danger' }}">
-				{{ row.amount }} €
+				{{ row.amount|number_format(2) }} €
 			</a>
 		</div>
-		<div class="col-2 d-flex justify-content-center align-items-center">{{ row.transaction.balance }} €</div>	
+		<div class="col-2 d-flex justify-content-center align-items-center">{{ row.transaction.balance|number_format(2) }} €</div>	
 	</div>
 {% endfor %}

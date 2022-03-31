@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Account;
+use App\Entity\Category;
 use App\Entity\Transaction;
+use App\Entity\TransactionSplitting;
 use App\Form\AccountType;
 use App\Form\FileFormType;
 use App\Repository\AccountRepository;
+use App\Repository\CategoryRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -19,7 +22,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/{id<\d+>}", name="home")
      */
-    public function index(int $id = 1, AccountRepository $accountRepository, Request $request, SluggerInterface $slugger)
+    public function index(int $id = 1, AccountRepository $accountRepository, Request $request, SluggerInterface $slugger, CategoryRepository $categoryRepository)
     {   
         $accounts = $accountRepository->findAll();
         $account = $accountRepository->find($id);
@@ -39,7 +42,7 @@ class HomeController extends AbstractController
                     $newFilename
                 );                
                 
-                $this->dataExtract($newFilename, $account);
+                $this->dataExtract($newFilename, $account, $categoryRepository);
                 
             } catch (FileException $e) {
                 throw $this->createNotFoundException('Erreur lors du téléchargement de votre fichier');
@@ -76,9 +79,18 @@ class HomeController extends AbstractController
         ]);
     }
 
-    public function dataExtract(string $newFilename, Account $account) {
+    public function dataExtract(string $newFilename, Account $account, CategoryRepository $categoryRepository) {
         $fileContent = utf8_decode(file_get_contents('data/' . $newFilename));
         $fileContentArray = explode(PHP_EOL, $fileContent);
+
+        // search end date and update account
+        $fullEndDate = $fileContentArray[37];
+        $cleanEndDate = substr($fullEndDate, 7); // delete tag
+        $year = substr($cleanEndDate, 0, 4);
+        $month = substr($cleanEndDate, 4, 2);
+        $day = substr($cleanEndDate, 6, 2);
+        $dateFormat = DateTime::createFromFormat('Y-m-d', $year . '-' . $month . '-' . $day);
+        $account->setUpdateDate($dateFormat);
 
         // clean file content header and footer
         $headerEndIndex = array_search('<STMTTRN>', $fileContentArray);
@@ -89,10 +101,9 @@ class HomeController extends AbstractController
             array_pop($fileContentArray);
         }
 
-        var_dump($fileContentArray);
         while(count($fileContentArray) > 0) {
-            $firstOpenTagIndex = array_search("<STMTTRN>", $fileContentArray);
-            $firstCloseTagIndex = array_search("</STMTTRN>", $fileContentArray);
+            $firstOpenTagIndex = array_search('<STMTTRN>', $fileContentArray);
+            $firstCloseTagIndex = array_search('</STMTTRN>', $fileContentArray);
             $transaction = [];
             for ($i = $firstOpenTagIndex; $i < $firstCloseTagIndex; $i++) {
                 $transaction[] = htmlspecialchars($fileContentArray[$i]);
@@ -129,13 +140,22 @@ class HomeController extends AbstractController
             $newTransaction->setAmount($amount);
             $newTransaction->setBalance($balance + $amount);
 
+            // create transaction splitting entities
+            $newTransactionSplitting = new TransactionSplitting();
+            $newTransactionSplitting->setTransaction($newTransaction);
+            $noCategoryEntity = $categoryRepository->findOneByName('À catégoriser');  // temp
+            $newTransactionSplitting->setCategory($noCategoryEntity);
+            $newTransactionSplitting->setRecurringCategory(null);
+            $newTransactionSplitting->setAmount($amount);
+            $newTransactionSplitting->setBankDate($dateFormat);
+
             // update account
             $account->setBalance($newTransaction->getBalance());
-            $account->setUpdateDate($newTransaction->getBankDate());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($account);
             $entityManager->persist($newTransaction);
+            $entityManager->persist($newTransactionSplitting);
             $entityManager->flush();
 
             for ($i = 0; $i <= $firstCloseTagIndex; $i++) {
